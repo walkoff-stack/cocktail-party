@@ -1,0 +1,15 @@
+body {
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Fallback iOS */
+  @supports not (min-height: 100dvh) {
+    @supports (min-height: -webkit-fill-available) {
+      min-height: -webkit-fill-available;
+    }
+  }
+  display: flex;
+  flex-direction: column;
+}

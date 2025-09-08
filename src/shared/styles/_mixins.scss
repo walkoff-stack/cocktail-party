@@ -1,0 +1,18 @@
+@use 'variables' as *;
+$breakpoints: (
+  'phone': $min-width,
+  'tablet': 768px,
+  'desktop': $max-width,
+) !default;
+
+@mixin res($media) {
+  @if map-has-key($breakpoints, $media) {
+    $breakpoint-value: map-get($breakpoints, $media) - 0.02px; // avoid overlapping
+
+    @media screen and (max-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoin '#{$media}' not found in $breakpoints. Available breakpoints: #{map-keys($breakpoints)}";
+  }
+}
