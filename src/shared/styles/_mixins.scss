@@ -9,7 +9,7 @@ $breakpoints: (
   @if map-has-key($breakpoints, $media) {
     $breakpoint-value: map-get($breakpoints, $media) - 0.02px; // avoid overlapping
 
-    @media screen and (max-width: $breakpoint-value) {
+    @media screen and (min-width: $breakpoint-value) {
       @content;
     }
   } @else {
