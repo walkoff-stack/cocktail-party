@@ -13,7 +13,9 @@ import NavSidebar from '@/shared/components/layout/sidebar/NavSidebar.vue';
 
 <style lang="scss">
 @use '@/shared/styles/container';
-@use '@/shared/styles/mixins';
+@use '@/shared/styles/mixins' as *;
+@use '@/shared/styles/variables' as *;
+
 .layout {
   display: grid;
   grid-template-areas: 'content';
@@ -23,14 +25,19 @@ import NavSidebar from '@/shared/components/layout/sidebar/NavSidebar.vue';
 
   @include res('desktop') {
     grid-template-areas: 'sidebar content';
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 200px 1fr;
+    background: $background-global;
   }
 }
 
 .content {
   grid-area: content;
   min-height: 100dvh;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem 2rem;
   box-sizing: border-box;
+
+  @include res('desktop') {
+    padding-top: 2rem;
+  }
 }
 </style>
