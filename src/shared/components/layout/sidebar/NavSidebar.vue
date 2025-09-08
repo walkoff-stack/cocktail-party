@@ -68,12 +68,17 @@ const navToggle = () => {
       background: $background-global;
       transition: all 0.15s;
 
+      &.active {
+        color: $white;
+        background: $black;
+      }
+
       &:first-letter {
         text-transform: uppercase;
       }
 
       &:hover {
-        color: white;
+        color: $white;
         background: $black;
       }
     }
