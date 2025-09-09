@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'sass:map';
 $breakpoints: (
   'phone': $min-width,
   'tablet': 768px,
@@ -6,13 +7,13 @@ $breakpoints: (
 ) !default;
 
 @mixin res($media) {
-  @if map-has-key($breakpoints, $media) {
-    $breakpoint-value: map-get($breakpoints, $media) - 0.02px; // avoid overlapping
+  @if map.has-key($breakpoints, $media) {
+    $breakpoint-value: map.get($breakpoints, $media) - 0.02px; // avoid overlapping
 
     @media screen and (min-width: $breakpoint-value) {
       @content;
     }
   } @else {
-    @warn "Breakpoin '#{$media}' not found in $breakpoints. Available breakpoints: #{map-keys($breakpoints)}";
+    @warn "Breakpoin '#{$media}' not found in $breakpoints. Available breakpoints: #{map.keys($breakpoints)}";
   }
 }

@@ -2,6 +2,6 @@
 .container {
   max-width: $max-width;
   margin: 0 auto;
-  min-width: $min-width;
+  min-width: calc($min-width - (100vw - 100%));
   width: 100%;
 }
