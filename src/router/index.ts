@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import { COCKTAIL_CODES } from '@/shared/consts/cocktails.ts';
 import CocktailPage from '@/pages/cocktail-page/CocktailPage.vue';
-import NotFound from '@/pages/not-found/NotFound.vue';
+import { defineAsyncComponent } from 'vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
   })),
   {
     path: '/:pathMatch(.*)*',
-    component: NotFound,
+    component: defineAsyncComponent(() => import('@/pages/not-found/NotFound.vue')),
   },
 ];
 

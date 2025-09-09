@@ -58,6 +58,7 @@ import NavSidebar from '@/shared/components/layout/sidebar/NavSidebar.vue';
   min-height: 100dvh;
   padding: 3rem 1rem 2rem;
   box-sizing: border-box;
+  position: relative;
 
   @include res('desktop') {
     padding-top: 2rem;

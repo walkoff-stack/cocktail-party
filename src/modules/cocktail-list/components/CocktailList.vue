@@ -3,6 +3,8 @@ import { useCocktailStore } from '@/modules/cocktail-list/stores/cocktail-store.
 import { computed, onMounted, watch } from 'vue';
 import type { CocktailCode } from '@/shared/consts/cocktails.ts';
 import CocktailCard from '@/modules/cocktail-list/components/CocktailCard.vue';
+import LoadingBar from '@/shared/components/ui/LoadingBar.vue';
+import ErrorMessage from '@/shared/components/ui/ErrorMessage.vue';
 
 const props = defineProps<{
   code: CocktailCode;
@@ -28,8 +30,8 @@ watch(
 
 <template>
   <div class="cocktail-list">
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="error">Error: {{ error }}</div>
+    <loading-bar v-if="loading"></loading-bar>
+    <error-message v-if="error">Error: {{ error }}</error-message>
     <div v-else>
       <cocktail-card
         v-for="cocktail of cocktails"
