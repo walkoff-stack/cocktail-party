@@ -9,6 +9,9 @@ const navStatusClassname = computed(() => (navOpenedStatus.value ? 'active' : ''
 const navToggle = () => {
   navOpenedStatus.value = !navOpenedStatus.value;
 };
+const handleNav = () => {
+  if (navOpenedStatus.value) navToggle();
+};
 </script>
 
 <template>
@@ -17,7 +20,7 @@ const navToggle = () => {
   </div>
   <nav :class="navStatusClassname" class="nav-sidebar">
     <div v-for="code of COCKTAIL_CODES" :key="code" class="nav-sidebar__item">
-      <router-link :to="`/${code}`">{{ code }}</router-link>
+      <router-link @click="handleNav" :to="`/${code}`">{{ code }}</router-link>
     </div>
   </nav>
 </template>
@@ -30,17 +33,20 @@ const navToggle = () => {
   padding: 3rem 1rem 2rem;
   top: 0;
   bottom: 0;
+  left: 0;
   min-height: 100dvh;
   box-sizing: border-box;
   background: $background-global;
   position: fixed;
-  left: -100%;
+  transform: translateX(-100%);
   width: 200px;
-  transition: left 0.3s ease-in;
-  will-change: left;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+  z-index: 1;
+  overflow-y: auto;
 
   &.active {
-    left: 0;
+    transform: translateX(0);
   }
 
   @include res('desktop') {
@@ -50,6 +56,7 @@ const navToggle = () => {
     left: 0;
     width: auto;
     height: 100dvh;
+    transform: translateX(0);
   }
 
   &__item {
