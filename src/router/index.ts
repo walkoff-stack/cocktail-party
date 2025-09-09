@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import { COCKTAIL_CODES } from '@/shared/consts/cocktails.ts';
 import CocktailPage from '@/pages/cocktail-page/CocktailPage.vue';
+import NotFound from '@/pages/not-found/NotFound.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,10 @@ const routes: Array<RouteRecordRaw> = [
     component: CocktailPage,
     props: { code },
   })),
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
