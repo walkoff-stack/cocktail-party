@@ -1,9 +1,10 @@
 import type { ICocktailApi } from '@/modules/cocktail-list/api/cocktail-api.ts';
 import type { ICocktailMapper } from '@/modules/cocktail-list/services/cocktail-mapper.ts';
 import type { Cocktail } from '@/modules/cocktail-list/types/cocktail.types.ts';
+import type { CocktailCode } from '@/shared/consts/cocktails.ts';
 
 export interface ICocktailService {
-  getCocktailsByCode(code: string): Promise<Cocktail[]>;
+  getCocktailsByCode(code: CocktailCode): Promise<Cocktail[]>;
 }
 
 export class CocktailService implements ICocktailService {
@@ -12,7 +13,7 @@ export class CocktailService implements ICocktailService {
     public mapper: ICocktailMapper
   ) {}
 
-  async getCocktailsByCode(code: string): Promise<Cocktail[]> {
+  async getCocktailsByCode(code: CocktailCode): Promise<Cocktail[]> {
     const response = await this.api.fetchCocktails({ code });
 
     if (!response.drinks) {

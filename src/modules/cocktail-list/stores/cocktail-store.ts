@@ -4,6 +4,7 @@ import type { Cocktail } from '@/modules/cocktail-list/types/cocktail.types.ts';
 import { CocktailApi } from '@/modules/cocktail-list/api/cocktail-api.ts';
 import { CocktailMapper } from '@/modules/cocktail-list/services/cocktail-mapper.ts';
 import { CocktailService } from '@/modules/cocktail-list/services/cocktail-service.ts';
+import type { CocktailCode } from '@/shared/consts/cocktails.ts';
 
 export const useCocktailStore = defineStore('cocktail', () => {
   // DI
@@ -13,13 +14,14 @@ export const useCocktailStore = defineStore('cocktail', () => {
 
   const loading = ref(false);
   const error = ref<string | null>(null);
-  const cocktailsCache = ref<Record<string, Cocktail[]>>({});
+  type CocktailCache = { [K in CocktailCode]: Cocktail[] };
+  const cocktailsCache = ref<CocktailCache>({} as CocktailCache);
 
-  const getCocktailsByCode = computed(() => (code: string) => {
+  const getCocktailsByCode = computed(() => (code: CocktailCode) => {
     return cocktailsCache.value[code] || [];
   });
 
-  const fetchCocktails = async (code: string) => {
+  const fetchCocktails = async (code: CocktailCode) => {
     if (cocktailsCache.value[code]) return; // data exist, request is not required
 
     loading.value = true;
@@ -36,7 +38,7 @@ export const useCocktailStore = defineStore('cocktail', () => {
   };
 
   const clearCache = () => {
-    cocktailsCache.value = {};
+    cocktailsCache.value = {} as CocktailCache;
   };
 
   return {
